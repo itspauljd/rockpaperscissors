@@ -22,8 +22,8 @@ function playRound(playerSelection, computerSelection) {
         return 'You Win!';
     }
     else if (playerSelection === 'Scissor' && computerSelection === 'Rock') {
-        return 'You Lose!'
         computerScore.innerText = parseInt(computerScore.innerText) + 1
+        return 'You Lose!'
     }
     else if (playerSelection === 'Scissor' && computerSelection === 'Paper') {
         playerScore.innerText = parseInt(playerScore.innerText) + 1
