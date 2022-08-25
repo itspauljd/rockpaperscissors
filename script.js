@@ -1,41 +1,63 @@
+const buttons = document.querySelectorAll('[data-choice]');
+const resetButton = document.querySelector('[data-reset')
+const playerScore = document.querySelector("[data-score='player']")
+const computerScore = document.querySelector("[data-score='computer']")
+const resultText = document.querySelector('[data-result]')
+
+
+
 function getComputerChoice() {
     let choices = ['Rock', 'Paper', 'Scissor'];
     let Selection = choices[Math.floor(Math.random() * choices.length)];
     return Selection
 }
 
-
 function playRound(playerSelection, computerSelection) {
     if (playerSelection === 'Rock' && computerSelection === 'Paper') {
-        return 'You Lose';
+        computerScore.innerText = parseInt(computerScore.innerText) + 1
+        return 'You Lose!';
     }
     else if (playerSelection === 'Rock' && computerSelection === 'Scissor') {
-        return 'You Win';
+        playerScore.innerText = parseInt(playerScore.innerText) + 1
+        return 'You Win!';
     }
     else if (playerSelection === 'Scissor' && computerSelection === 'Rock') {
-        return 'You Lose'
+        return 'You Lose!'
+        computerScore.innerText = parseInt(computerScore.innerText) + 1
     }
     else if (playerSelection === 'Scissor' && computerSelection === 'Paper') {
-        return 'You Win'
+        playerScore.innerText = parseInt(playerScore.innerText) + 1
+        return 'You Win!'
     }
     else if (playerSelection === 'Paper' && computerSelection === 'Scissor') {
-        return 'You Lose'
+        computerScore.innerText = parseInt(computerScore.innerText) + 1
+        return 'You Lose!'
     }
-    else if (playerSelection === 'Scissor' && computerSelection === 'Paper') {
-        return 'You Win'
+    else if (playerSelection === 'Paper' && computerSelection === 'Rock') {
+        playerScore.innerText = parseInt(playerScore.innerText) + 1
+        return 'You Win!'
     }
     else if (playerSelection === computerSelection) {
-        return 'You Tie';
+        return 'You Tie!';
     }
 }
 
+function reset() {
+    resultText.innerText = 'Click one to play!'
+    playerScore.innerText = '0'
+    computerScore.innerText = '0'
 
-function game() {
-    for (let i = 0; i < 5; i++) {
-        let playerSelection = prompt('Please Choose Rock Paper or Scissor!')
+}
+
+resetButton.addEventListener('click', e => {
+    reset()
+})
+
+buttons.forEach(buttons => {
+    buttons.addEventListener('click', e => {
+        let playerSelection = buttons.dataset.choice;
         let computerSelection = getComputerChoice();
-        console.log(playRound(playerSelection, computerSelection))
-    }
-}
+        resultText.innerText = (playRound(playerSelection, computerSelection));
+    })
+})
 
-game()
